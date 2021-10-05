@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+	<changeSet id="96a0343a26e5ccbbd07606efaeb015893985de1f" author="(TESTAPEX)-Generated" failOnError="false"    >
+		<n0:createOracleTrigger objectName="DEMO_PRODUCT_INFO_BD" objectType="TRIGGER" ownerName="TESTAPEX"   >
+			<n0:source><![CDATA[
+  CREATE OR REPLACE EDITIONABLE TRIGGER "TESTAPEX"."DEMO_PRODUCT_INFO_BD" 
+    before delete on demo_product_info
+    for each row
+begin
+    sample_pkg.demo_tag_sync(
+        p_new_tags      => null,
+        p_old_tags      => :old.tags,
+        p_content_type  => 'PRODUCT',
+        p_content_id    => :old.product_id );
+end;
+
+/
+ALTER TRIGGER "TESTAPEX"."DEMO_PRODUCT_INFO_BD" ENABLE]]></n0:source>
+		</n0:createOracleTrigger>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+	<changeSet id="f4d4ef3922de0d996a564d80285f650a999eaaa0" author="(TESTAPEX)-Generated" failOnError="false"    >
+		<n0:createOracleTrigger objectName="DEMO_ORDER_ITEMS_BI" objectType="TRIGGER" ownerName="TESTAPEX"   >
+			<n0:source><![CDATA[
+  CREATE OR REPLACE EDITIONABLE TRIGGER "TESTAPEX"."DEMO_ORDER_ITEMS_BI" 
+  BEFORE insert on "DEMO_ORDER_ITEMS" for each row
+declare
+  order_item_id number;
+begin
+  if :new.order_item_id is null then
+    select demo_order_items_seq.nextval 
+      into order_item_id 
+      from dual;
+    :new.order_item_id := order_item_id;
+  end if;
+end;
+
+/
+ALTER TRIGGER "TESTAPEX"."DEMO_ORDER_ITEMS_BI" ENABLE]]></n0:source>
+		</n0:createOracleTrigger>
+	</changeSet>
+</databaseChangeLog>

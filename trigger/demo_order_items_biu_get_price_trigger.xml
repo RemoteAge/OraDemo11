@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+	<changeSet id="24f999946fa7030c6aa329ab1629d4f4dc4e24d3" author="(TESTAPEX)-Generated" failOnError="false"    >
+		<n0:createOracleTrigger objectName="DEMO_ORDER_ITEMS_BIU_GET_PRICE" objectType="TRIGGER" ownerName="TESTAPEX"   >
+			<n0:source><![CDATA[
+  CREATE OR REPLACE EDITIONABLE TRIGGER "TESTAPEX"."DEMO_ORDER_ITEMS_BIU_GET_PRICE" 
+  before insert or update on demo_order_items for each row
+declare
+  l_list_price number;
+begin
+  if :new.unit_price is null then
+    -- First, we need to get the current list price of the order line item
+    select list_price
+    into l_list_price
+    from demo_product_info
+    where product_id = :new.product_id;
+    -- Once we have the correct price, we will update the order line with the correct price
+    :new.unit_price := l_list_price;
+  end if;
+end;
+
+/
+ALTER TRIGGER "TESTAPEX"."DEMO_ORDER_ITEMS_BIU_GET_PRICE" ENABLE]]></n0:source>
+		</n0:createOracleTrigger>
+	</changeSet>
+</databaseChangeLog>

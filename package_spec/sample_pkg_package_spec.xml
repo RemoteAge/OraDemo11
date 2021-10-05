@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog 
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+	<changeSet id="f7bce593cddb3cbf8c0322aedb9d8e9ea7ef70ac" author="(TESTAPEX)-Generated" failOnError="false"    >
+		<n0:createOraclePackageSpec objectName="SAMPLE_PKG" objectType="PACKAGE_SPEC" ownerName="TESTAPEX"   >
+			<n0:source><![CDATA[
+  CREATE OR REPLACE EDITIONABLE PACKAGE "TESTAPEX"."SAMPLE_PKG" is
+    --
+    -- Error Handling function
+    --
+    function demo_error_handling (
+        p_error in apex_error.t_error )
+        return apex_error.t_error_result;
+    
+    --
+    -- Tag Cleaner function
+    --
+    function demo_tags_cleaner (
+        p_tags  in varchar2,
+        p_case  in varchar2 default 'U') 
+        return varchar2;
+    
+    --
+    -- Tag Synchronisation Procedure
+    --
+    procedure demo_tag_sync (
+        p_new_tags          in varchar2,
+        p_old_tags          in varchar2,
+        p_content_type      in varchar2,
+        p_content_id        in number );
+end sample_pkg;
+]]></n0:source>
+		</n0:createOraclePackageSpec>
+	</changeSet>
+</databaseChangeLog>
