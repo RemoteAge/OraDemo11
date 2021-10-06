@@ -5,7 +5,7 @@
 	xmlns:n0="http://www.oracle.com/xml/ns/dbchangelog-ext" 
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
 	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
-	<changeSet id="69d8a76431d5163ee08a273fd3ee1301f2144711" author="(TESTAPEX)-Generated" failOnError="false"    >
+	<changeSet id="395ff371e73cebd9fa301d2045f7569c49288a55" author="(TESTAPEX)-Generated" failOnError="false"    >
 		<n0:createSxmlObject objectName="DEMO_CUSTOMERS" objectType="TABLE" ownerName="TESTAPEX"   >
 			<n0:source><![CDATA[
   <TABLE xmlns="http://xmlns.oracle.com/ku" version="1.0">
@@ -96,6 +96,12 @@
             <NAME>TAGS</NAME>
             <DATATYPE>VARCHAR2</DATATYPE>
             <LENGTH>4000</LENGTH>
+            <COLLATE_NAME>USING_NLS_COMP</COLLATE_NAME>
+         </COL_LIST_ITEM>
+         <COL_LIST_ITEM>
+            <NAME>TEST</NAME>
+            <DATATYPE>VARCHAR2</DATATYPE>
+            <LENGTH>20</LENGTH>
             <COLLATE_NAME>USING_NLS_COMP</COLLATE_NAME>
          </COL_LIST_ITEM>
       </COL_LIST>
